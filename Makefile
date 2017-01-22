@@ -3,7 +3,7 @@ TARGET = brubeck
 LIBS = -lm -pthread -lrt -lcrypto -ljansson
 CC = gcc
 CXX = g++
-CFLAGS = -g -Wall -O3 -Wno-strict-aliasing -Isrc -Ivendor/ck/include -DNDEBUG=1 -DGIT_SHA=\"$(GIT_SHA)\"
+CFLAGS = -CFLAGS -Isrc -Ivendor/ck/include -DNDEBUG=1 -DGIT_SHA=\"$(GIT_SHA)\"
 
 .PHONY: default all clean
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+#TODO: check that different compiler actually used. Why do CFLAGS require rewrite but CC does not?
 
 sed -i.bak s/-CFLAGS/$2/g Makefile
 make CC=$1

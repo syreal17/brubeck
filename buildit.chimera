@@ -1,8 +1,11 @@
 #!/bin/bash
 #TODO: check that different compiler actually used. Why do CFLAGS require rewrite but CC does not?
+cflags=$2
+cflags="${cflags%\"}"
+cflags="${cflags#\"}"
 
-sed -i.bak s/-CFLAGS/$2/g Makefile
+sed -i.bak s/-CFLAGS/$cflags/g Makefile
 make CC=$1
 cp brubeck ../$4/brubeck.$3
 make clean
-sed -i.bak s/$2/-CFLAGS/g Makefile
+sed -i.bak s/$cflags/-CFLAGS/g Makefile

@@ -3,11 +3,14 @@
 cflags=$2
 cflags="${cflags%\"}"
 cflags="${cflags#\"}"
-
 cd src_corpora/brubeck
-sed -i.bak s/-CFLAGS/$cflags/g Makefile
-make CC=$1
+test -f vendor/ck/Makefile || $(git submodule update --init && cd vendor/ck && ./configure && makei && cd ../..)
+#sed -i.bak s/-CFLAGS/$cflags/g Makefile
+
+make CC=$1 CFLAGS="$cflags -fPIC -g -Isrc -Ivendor/ck/include -DNDEBUG=1 -DGIT_SHA=\"$(GIT_SHA)\""
 cp brubeck ../$4/brubeck.$3
+install -D brubeck -m 644 -t ../../$4/
+mv ../../$4/brubeck ../../$4/brubeck.$3
 make clean
-sed -i.bak s/$cflags/-CFLAGS/g Makefile
+#sed -i.bak s/$cflags/-CFLAGS/g Makefile
 cd ../..
